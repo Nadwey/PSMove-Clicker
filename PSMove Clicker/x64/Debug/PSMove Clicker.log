@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(31,24): warning C4244: "return": konwersja z "WPARAM" do "int", możliwa utrata danych
+  PSMove Clicker.vcxproj -> C:\Users\Bart\source\repos\PSMove Clicker\x64\Debug\PSMove Clicker.exe

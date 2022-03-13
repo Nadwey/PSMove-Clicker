@@ -1,0 +1,10 @@
+﻿  main.cpp
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(154,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(155,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(336,9): warning C4244: "return": konwersja z "WPARAM" do "int", możliwa utrata danych
+  Trwa generowanie kodu
+  2 of 778 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
+  Zakończono generowanie kodu
+  PSMove Clicker.vcxproj -> C:\Users\Bart\source\repos\PSMove Clicker\x64\Release\PSMove Clicker.exe
