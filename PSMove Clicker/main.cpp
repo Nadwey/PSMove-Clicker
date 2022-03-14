@@ -49,11 +49,11 @@ void tryConnect()
 	{
 		if (PSM_Initialize(PSMOVESERVICE_DEFAULT_ADDRESS, PSMOVESERVICE_DEFAULT_PORT, PSM_DEFAULT_TIMEOUT) != PSMResult_Success)
 		{
-			MessageBoxW(nullptr, L"Nie uda³o siê po³¹czyæ z serwerem,\r\nPonowna próba za 5 sekund", L"B³¹d", MB_OK | MB_ICONERROR);
+			MessageBoxW(nullptr, L"Nie uda³o siê po³¹czyæ z serwerem,\r\n\r\nSprawdŸ czy PSMoveService jest w³¹czony\r\nlub go zresetuj\r\n\r\nPonowna próba za 5 sekund", L"B³¹d", MB_OK | MB_ICONERROR);
 			time_t start = getTimestampMilis();
 			while (getTimestampMilis() - start < 5000)
 			{
-				NW::UI::App::DoEvents();
+				if (NW::UI::App::DoEvents()) return;
 				Sleep(1);
 			}
 			continue;
