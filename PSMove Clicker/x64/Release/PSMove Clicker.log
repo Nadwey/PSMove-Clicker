@@ -1,12 +1,1 @@
-﻿  main.cpp
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(171,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(172,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(191,40): warning C4244: "inicjowanie": konwersja z "float" do "unsigned char", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(191,30): warning C4244: "inicjowanie": konwersja z "float" do "const unsigned char", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(310,9): warning C4244: "return": konwersja z "WPARAM" do "int", możliwa utrata danych
-  Trwa generowanie kodu
-  1 of 652 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  Zakończono generowanie kodu
-  PSMove Clicker.vcxproj -> C:\Users\Bart\source\repos\PSMove Clicker\x64\Release\PSMove Clicker.exe
+﻿LINK : fatal error LNK1181: nie można otworzyć pliku wejściowego „C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\PSMoveClient_CAPI.lib”
