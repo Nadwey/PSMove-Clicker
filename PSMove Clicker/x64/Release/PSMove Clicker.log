@@ -1,28 +1,12 @@
 ﻿  main.cpp
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(145,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(146,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(165,40): warning C4244: "inicjowanie": konwersja z "float" do "unsigned char", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(165,30): warning C4244: "inicjowanie": konwersja z "float" do "const unsigned char", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(283,9): warning C4244: "return": konwersja z "WPARAM" do "int", możliwa utrata danych
-  NadWin.cpp
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(881,102): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1003,116): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1112,134): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1190,123): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1323,150): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1349,98): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1391,32): warning C4244: "return": konwersja z "LRESULT" do "int", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1406,32): warning C4244: "return": konwersja z "LRESULT" do "UINT", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1459,92): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1486,102): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1593,154): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1630,140): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1664,32): warning C4244: "return": konwersja z "LRESULT" do "int", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1669,32): warning C4244: "return": konwersja z "LRESULT" do "int", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1679,32): warning C4244: "return": konwersja z "LRESULT" do "int", możliwa utrata danych
-C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\NadWin\NadWin.cpp(1703,108): warning C4244: "argument": konwersja z "LONG_PTR" do "DWORD", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(171,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(172,41): warning C4244: "=": konwersja z "float" do "LONG", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(191,40): warning C4244: "inicjowanie": konwersja z "float" do "unsigned char", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(191,30): warning C4244: "inicjowanie": konwersja z "float" do "const unsigned char", możliwa utrata danych
+C:\Users\Bart\source\repos\PSMove Clicker\PSMove Clicker\main.cpp(310,9): warning C4244: "return": konwersja z "WPARAM" do "int", możliwa utrata danych
   Trwa generowanie kodu
-  Previous IPDB not found, fall back to full compilation.
-  All 641 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 652 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   PSMove Clicker.vcxproj -> C:\Users\Bart\source\repos\PSMove Clicker\x64\Release\PSMove Clicker.exe

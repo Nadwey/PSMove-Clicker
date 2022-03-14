@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <sstream>
+#include <chrono>
 
 #pragma comment(lib, "Comctl32.lib")
 #pragma comment(lib, "PSMoveClient_CAPI.lib")
@@ -36,6 +37,31 @@ int refreshRateVal = 100;
 UINT_PTR timerID = 0;
 NW::UI::TextBoxMultiline* logTextbox;
 
+long long getTimestampMilis()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
+
+void tryConnect()
+{
+	bool success = false;
+	while (!success)
+	{
+		if (PSM_Initialize(PSMOVESERVICE_DEFAULT_ADDRESS, PSMOVESERVICE_DEFAULT_PORT, PSM_DEFAULT_TIMEOUT) != PSMResult_Success)
+		{
+			MessageBoxW(nullptr, L"Nie uda³o siê po³¹czyæ z serwerem,\r\nPonowna próba za 5 sekund", L"B³¹d", MB_OK | MB_ICONERROR);
+			time_t start = getTimestampMilis();
+			while (getTimestampMilis() - start < 5000)
+			{
+				NW::UI::App::DoEvents();
+				Sleep(1);
+			}
+			continue;
+		}
+		success = true;
+	}
+}
+
 void rebuildControllerList()
 {
 	memset(&controllerList, 0, sizeof(PSMControllerList));
@@ -56,10 +82,10 @@ void uninitializeController(int id)
 
 void InfoTimer(HWND, UINT, UINT_PTR, DWORD)
 {
-	
-	if (PSM_GetIsInitialized())
+	std::wstringstream wss;
+	wss << L"Po³¹czono: " << (PSM_GetIsConnected() ? "Tak" : "Nie") << "\r\n\r\n";
+	if (PSM_GetIsConnected())
 	{
-		std::wstringstream wss;
 		for (int i = 0; i < controllerList.count; i++) {
 			PSMController* controller = controllers[i].controller;
 
@@ -72,10 +98,10 @@ void InfoTimer(HWND, UINT, UINT_PTR, DWORD)
 			}
 
 			wss << L"Kontroler " << i << L": \r\n" << L"Bateria: " << batteryText << L"\r\n" << L"Czêstotliwoœæ odœwie¿ania (razy na sekunde) : " << controller->DataFrameAverageFPS << "\r\n\r\n";
-
-			logTextbox->SetText(wss.str());
 		}
 	}
+
+	logTextbox->SetText(wss.str());
 }
 
 void setControllerColor(int id, unsigned char r, unsigned char g, unsigned char b)
@@ -85,7 +111,7 @@ void setControllerColor(int id, unsigned char r, unsigned char g, unsigned char 
 
 void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 {
-	if (PSM_GetIsInitialized())
+	if (PSM_GetIsConnected())
 	{
 		PSM_Update();
 
@@ -168,6 +194,7 @@ void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 			controllerInf.color.b = static_cast<unsigned char>(controllerInf.color.b - minus) > controllerInf.color.b ? 0 : static_cast<unsigned char>(controllerInf.color.b - minus);
 		}
 	}
+	if (!PSM_GetIsConnected()) PostQuitMessage(0);
 }
 
 void refreshForceText(NW::UI::TextBoxSingleline* force)
@@ -184,7 +211,7 @@ void refreshRefreshRateText(NW::UI::TextBoxSingleline* refreshRate)
 	refreshRate->SetPlaceholder(wss.str());
 }
 
-int main()
+INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	NW::UI::App app(L"PSMove Clicker");
 	NW::UI::Window mainWindow(L"PSMove Clicker", CW_USEDEFAULT, CW_USEDEFAULT, 800, 500);
@@ -255,13 +282,15 @@ int main()
 	logLoc.SetReadOnly(true);
 	logTextbox = &logLoc;
 	mainWindow.Show();
-
-
-
-
-	PSM_Initialize(PSMOVESERVICE_DEFAULT_ADDRESS, PSMOVESERVICE_DEFAULT_PORT, PSM_DEFAULT_TIMEOUT);
-	timerID = SetTimer(nullptr, 0, 1000 / refreshRateVal, MainTimer);
 	SetTimer(nullptr, 0, 1000 / 5, InfoTimer);
+
+
+
+	tryConnect();
+
+
+
+	timerID = SetTimer(nullptr, 0, 1000 / refreshRateVal, MainTimer);
 
 	rebuildControllerList();
 	for (int i = 0; i < controllerList.count; i++)

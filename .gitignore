@@ -1,2 +1,10 @@
 .vs/
 *.zip
+*.pdb
+*.exe
+*.dll
+*.lib
+x64/
+x32/
+Release/
+Debug/
