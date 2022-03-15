@@ -34,7 +34,9 @@ Oh and it only (somehow) works on Windows
 
 ### MSVC
 
-Paste the binaries from in the source folder and also the dll file to your exe folder
+Paste the binaries from in the source folder and also the dll file to your exe folder  
+Or build PSMoveService yourself  
+Or download build of PSMoveService, then generate .lib definition file
 
 It should look like this:
 
