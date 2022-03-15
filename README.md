@@ -6,6 +6,10 @@ Btw I'm not responsible for breaking your PSMove
 
 ## How do I use it?
 
+I recommend using [PSMoveServiceEx](https://github.com/Timocop/PSMoveServiceEx/) instead of [PSMoveService](https://github.com/psmoveservice/PSMoveService), but you can also use it.
+
+Run PSMoveService first, then PSMove Clicker.
+
 Circle button - Right Mouse Button  
 Select button - Escape Button  
 PS Button - Sets main controller in ADOFAI mode
