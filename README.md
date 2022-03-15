@@ -17,7 +17,7 @@ PS Button - Sets main controller in ADOFAI mode
 ## How do I click?
 
 You will see...  
-HINT: You rage.
+HINT: Rage.
  
 ## Not so fun facts
 
