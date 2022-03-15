@@ -36,6 +36,8 @@ PSMVector3f VEL = { -4.0f, 0.0f, 0.0f };
 int refreshRateVal = 100;
 UINT_PTR timerID = 0;
 NW::UI::TextBoxMultiline* logTextbox;
+int mainPadIndex = 0;
+bool adofaiMode = false;
 
 long long getTimestampMilis()
 {
@@ -44,21 +46,9 @@ long long getTimestampMilis()
 
 void tryConnect()
 {
-	bool success = false;
-	while (!success)
+	if (PSM_Initialize(PSMOVESERVICE_DEFAULT_ADDRESS, PSMOVESERVICE_DEFAULT_PORT, PSM_DEFAULT_TIMEOUT) != PSMResult_Success)
 	{
-		if (PSM_Initialize(PSMOVESERVICE_DEFAULT_ADDRESS, PSMOVESERVICE_DEFAULT_PORT, PSM_DEFAULT_TIMEOUT) != PSMResult_Success)
-		{
-			MessageBoxW(nullptr, L"Nie uda³o siê po³¹czyæ z serwerem,\r\n\r\nSprawdŸ czy PSMoveService jest w³¹czony\r\nlub go zresetuj\r\n\r\nPonowna próba za 5 sekund", L"B³¹d", MB_OK | MB_ICONERROR);
-			time_t start = getTimestampMilis();
-			while (getTimestampMilis() - start < 5000)
-			{
-				if (NW::UI::App::DoEvents()) return;
-				Sleep(1);
-			}
-			continue;
-		}
-		success = true;
+		return;
 	}
 }
 
@@ -179,19 +169,33 @@ void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 
 			if (calibsens.Gyroscope.x < VEL.x && speeds[i].x > VEL.x) {
 				setControllerColor(i, 255, 255, 255);
-				INPUT Inputs[2] = { 0 };
-				Inputs[0].type = INPUT_MOUSE;
-				Inputs[0].mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-				Inputs[1].type = INPUT_MOUSE;
-				Inputs[1].mi.dwFlags = MOUSEEVENTF_LEFTUP;
-				SendInput(2, Inputs, sizeof(INPUT));
+				if (mainPadIndex == i || !adofaiMode)
+				{
+					INPUT Inputs[2] = { 0 };
+					Inputs[0].type = INPUT_MOUSE;
+					Inputs[0].mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+					Inputs[1].type = INPUT_MOUSE;
+					Inputs[1].mi.dwFlags = MOUSEEVENTF_LEFTUP;
+					SendInput(2, Inputs, sizeof(INPUT));
+				}
+				else {
+					keybd_event(0x41 + i, 0, 0, 0);
+					keybd_event(0x41 + i, 0, KEYEVENTF_KEYUP, 0);
+				}
 			}
 
 			speeds[i] = calibsens.Gyroscope;
 			const unsigned char minus = 2047.0f / refreshRateVal;
-			controllerInf.color.r = static_cast<unsigned char>(controllerInf.color.r - minus) > controllerInf.color.r ? 0 : static_cast<unsigned char>(controllerInf.color.r - minus);
-			controllerInf.color.g = static_cast<unsigned char>(controllerInf.color.g - minus) > controllerInf.color.g ? 0 : static_cast<unsigned char>(controllerInf.color.g - minus);
-			controllerInf.color.b = static_cast<unsigned char>(controllerInf.color.b - minus) > controllerInf.color.b ? 0 : static_cast<unsigned char>(controllerInf.color.b - minus);
+			const unsigned char brightness = adofaiMode ? (i == mainPadIndex ? 25 : 0) : 0;
+
+			const unsigned char r = static_cast<unsigned char>(controllerInf.color.r - minus) > controllerInf.color.r ? 0 : static_cast<unsigned char>(controllerInf.color.r - minus);
+			const unsigned char g = static_cast<unsigned char>(controllerInf.color.g - minus) > controllerInf.color.g ? 0 : static_cast<unsigned char>(controllerInf.color.g - minus);
+			const unsigned char b = static_cast<unsigned char>(controllerInf.color.b - minus) > controllerInf.color.b ? 0 : static_cast<unsigned char>(controllerInf.color.b - minus);
+
+			controllerInf.color.r = r < brightness ? brightness : r;
+			controllerInf.color.g = g < brightness ? brightness : g;
+			controllerInf.color.b = b < brightness ? brightness : b;
+
 		}
 	}
 	if (!PSM_GetIsConnected()) PostQuitMessage(0);
@@ -271,14 +275,22 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		}
 		}
+	};
 
+	NW::UI::CheckBox adofaiModeCheckbox(&mainWindow, NW::UI::Position(5, 65, 360, 25), L"ADOFAI mode");
+	adofaiModeCheckbox.EventHandler = [&](NW::UI::ControlEventTypes eventType, NW::UI::ControlEventInfo* eventInfo) {
+		switch (eventType)
+		{
+		case NW::UI::ControlEventTypes::FromParent_Command:
+			adofaiMode = adofaiModeCheckbox.GetChecked();
+			break;
+		}
 	};
 
 
-
-
-
-	NW::UI::TextBoxMultiline logLoc(&mainWindow, NW::UI::Position(365, 5, 400, 400), L"");
+	NW::UI::Font logFont(14, L"Segoe UI");
+	NW::UI::TextBoxMultiline logLoc(&mainWindow, NW::UI::Position(365, 5, 400, 200), L"");
+	logLoc.SetFont(&logFont);
 	logLoc.SetReadOnly(true);
 	logTextbox = &logLoc;
 	mainWindow.Show();
