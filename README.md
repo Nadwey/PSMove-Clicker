@@ -1,4 +1,19 @@
 # PSMove-Clicker
+
+This program was primarly made for ADOFAI, but you can use it as a mouse.
+
+Btw I'm not responsible for breaking your PSMove
+
+## How do I use it?
+
+Circle button - Right Mouse Button
+Select button - Escape Button
+PS Button - Sets main controller in ADOFAI mode
+
+## How do I click?
+
+You will see...
+HINT: You rage.
  
 ## Not so fun facts
 
