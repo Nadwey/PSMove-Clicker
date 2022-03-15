@@ -151,6 +151,11 @@ void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 				keybd_event(VK_ESCAPE, 0, KEYEVENTF_KEYUP, 0); // let up the Esc key
 			}
 
+			if (adofaiMode && controller->ControllerState.PSMoveState.PSButton == PSMButtonState_DOWN)
+			{
+				mainPadIndex = i;
+			}
+
 			if (controller->ControllerState.PSMoveState.TriggerValue > 200)
 			{
 				setControllerColor(i, 0, 255, 0);
