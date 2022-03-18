@@ -2,7 +2,8 @@
 
 This program was primarly made for ADOFAI, but you can use it as a mouse.
 
-Btw I'm not responsible for breaking your PSMove (it shouldn't happen as long as you keep force above -10)
+Btw I'm not responsible for breaking your PSMove (it shouldn't happen as long as you keep force above -10)  
+Also, don't set the force to 0... Bad things will happen
 
 ## How do I use it?
 
@@ -10,30 +11,38 @@ I recommend using [PSMoveServiceEx](https://github.com/Timocop/PSMoveServiceEx/)
 
 Run PSMoveService first, then PSMove Clicker.
 
-Circle button - Right Mouse Button  
-Select button - Escape Button  
-PS Button - Sets main controller in ADOFAI mode
+Buttons:
+
+- Cross button - Left Mouse Button - supports holding  
+- Circle button - Right Mouse Button - supports holding  
+- Select button - Escape Button - supports holding  
+- PS Button - Sets main controller in ADOFAI mode
+
+Control panel:
+
+- Textbox with -4.000000 - force of the swing
+- ADOFAI mode - Fixes multiple clicks at once in ADOFAI (presses keyboard keys) (main controller (will light up) presses mouse)
 
 ## How do I click?
 
-You will see...  
-HINT: Rage.
- 
-## Not so fun facts
+Swing.
 
-This repository has:
+## Does it work with Geometry Dash?
 
-- ugly code
-- probably memory leaks, but who cares anyways
-- bad ui
+Only Cube game mode and also there's a delay  
+~~You can always play with the cross button~~
 
-Oh and it only (somehow) works on Windows
+## How to build (MSVC)
 
-## How to build
+Notice: This "tutorial" is not tested
 
-### MSVC (tested on VS 2022), should work on the most versions
+### Step 1
 
-Paste the lib from [there](PSMoveClient_CAPI-Binaries.zip) to the root folder and also the dll file to your exe folder  
+Install [gammasoft71/xtd](https://github.com/gammasoft71/xtd) and add it to this project, idk how to do it, but I will make an update
+
+### Step 2
+
+Paste the lib file from [there](PSMoveClient_CAPI-Binaries.zip) to build/PSMove_Clicker and also the dll file to your exe folder  
 Or build PSMoveService yourself  
 Or download build of PSMoveService, then generate .lib definition file
 
@@ -41,15 +50,21 @@ It should look like this:
 
 ```text
 root
-├───x64
-│   └───Release (or Debug)
-│       PSMove Clicker.exe
-│       PSMoveClient_CAPI.dll
-PSMoveClient_CAPI.lib
+└───build
+    └───PSMove_Clicker
+        │   PSMoveClient_CAPI.lib
+        └───Release (or debug)
+                PSMoveClient_CAPI.dll
 ```
 
-Also keep the NadWin directory (it's a GUI library from stone age)
+### Step 3
 
-### Other compilers
+Open build/PSMove_Clicker.sln
+
+Right click on PSMove_Clicker in the solution explorer and click `Set as Startup project`
+
+## How to build (Other compilers)
+
+### Step 1
 
 Good luck
