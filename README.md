@@ -2,7 +2,7 @@
 
 This program was primarly made for ADOFAI, but you can use it as a mouse.
 
-Btw I'm not responsible for breaking your PSMove
+Btw I'm not responsible for breaking your PSMove (it shouldn't happen as long as you keep force above -10)
 
 ## How do I use it?
 
@@ -31,7 +31,7 @@ Oh and it only (somehow) works on Windows
 
 ## How to build
 
-### MSVC
+### MSVC (tested on VS 2022), should work on the most versions
 
 Paste the lib from [there](PSMoveClient_CAPI-Binaries.zip) to the root folder and also the dll file to your exe folder  
 Or build PSMoveService yourself  
