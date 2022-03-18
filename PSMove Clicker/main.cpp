@@ -35,7 +35,7 @@ std::unordered_map<int, controllerInfo> controllers;
 PSMVector3f VEL = { -4.0f, 0.0f, 0.0f };
 int refreshRateVal = 100;
 UINT_PTR timerID = 0;
-NW::UI::TextBoxMultiline* logTextbox;
+NW::TextBoxMultiline* logTextbox;
 int mainPadIndex = 0;
 bool adofaiMode = false;
 
@@ -73,21 +73,21 @@ void uninitializeController(int id)
 void InfoTimer(HWND, UINT, UINT_PTR, DWORD)
 {
 	std::wstringstream wss;
-	wss << L"Po≥πczono: " << (PSM_GetIsConnected() ? "Tak" : "Nie") << "\r\n\r\n";
+	wss << L"Connected: " << (PSM_GetIsConnected() ? "Yes" : "No") << "\r\n\r\n";
 	if (PSM_GetIsConnected())
 	{
 		for (int i = 0; i < controllerList.count; i++) {
 			PSMController* controller = controllers[i].controller;
 
 			std::wstring batteryText;
-			if (controller->ControllerState.PSMoveState.BatteryValue == PSMBattery_Charging) batteryText = L"£adowanie...";
-			else if (controller->ControllerState.PSMoveState.BatteryValue == PSMBattery_Charged) batteryText = L"Na≥adowana";
+			if (controller->ControllerState.PSMoveState.BatteryValue == PSMBattery_Charging) batteryText = L"Charging...";
+			else if (controller->ControllerState.PSMoveState.BatteryValue == PSMBattery_Charged) batteryText = L"Charged";
 			else {
 				batteryText = std::to_wstring(controller->ControllerState.PSMoveState.BatteryValue * 20);
 				batteryText += L"%";
 			}
 
-			wss << L"Kontroler " << i << L": \r\n" << L"Bateria: " << batteryText << L"\r\n" << L"CzÍstotliwoúÊ odúwieøania (razy na sekunde) : " << controller->DataFrameAverageFPS << "\r\n\r\n";
+			wss << L"Controller " << i << L": \r\n" << L"Battery: " << batteryText << L"\r\n" << L"Refresh rate (times per second) : " << controller->DataFrameAverageFPS << "\r\n\r\n";
 		}
 	}
 
@@ -190,8 +190,8 @@ void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 			}
 
 			speeds[i] = calibsens.Gyroscope;
-			const unsigned char minus = 2047.0f / refreshRateVal;
-			const unsigned char brightness = adofaiMode ? (i == mainPadIndex ? 25 : 0) : 0;
+			const unsigned char minus = 1500.0f / refreshRateVal;
+			const unsigned char brightness = adofaiMode ? (i == mainPadIndex ? 5 : 0) : 0;
 
 			const unsigned char r = static_cast<unsigned char>(controllerInf.color.r - minus) > controllerInf.color.r ? 0 : static_cast<unsigned char>(controllerInf.color.r - minus);
 			const unsigned char g = static_cast<unsigned char>(controllerInf.color.g - minus) > controllerInf.color.g ? 0 : static_cast<unsigned char>(controllerInf.color.g - minus);
@@ -206,42 +206,45 @@ void MainTimer(HWND, UINT, UINT_PTR, DWORD)
 	if (!PSM_GetIsConnected()) PostQuitMessage(0);
 }
 
-void refreshForceText(NW::UI::TextBoxSingleline* force)
+void refreshForceText(NW::TextBoxSingleline* force)
 {
 	std::wstringstream wss;
-	wss << L"Si≥a (" << VEL.x << L")";
+	wss << L"Force (" << VEL.x << L")";
 	force->SetPlaceholder(wss.str());
 }
 
-void refreshRefreshRateText(NW::UI::TextBoxSingleline* refreshRate)
+void refreshRefreshRateText(NW::TextBoxSingleline* refreshRate)
 {
 	std::wstringstream wss;
-	wss << L"Odúwieøanie (" << refreshRateVal << L")";
+	wss << L"Refresh rate (" << refreshRateVal << L")";
 	refreshRate->SetPlaceholder(wss.str());
 }
 
 INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	NW::UI::App app(L"PSMove Clicker");
-	NW::UI::Window mainWindow(L"PSMove Clicker", CW_USEDEFAULT, CW_USEDEFAULT, 800, 500);
+	NW::App app(L"PSMove Clicker");
+	NW::Window mainWindow(L"PSMove Clicker", CW_USEDEFAULT, CW_USEDEFAULT, 800, 500);
 
-	mainWindow.EventHandler = [&](NW::UI::WindowEventTypes eventType, NW::UI::WindowEventInfo* eventInfo) {
+	NW::Font font(19, L"Segoe UI");
+	mainWindow.SetDefaultFont(&font);
+
+	mainWindow.EventHandler = [&](NW::WindowEventTypes eventType, NW::WindowEventInfo* eventInfo) {
 		switch (eventType)
 		{
-		case NW::UI::WindowEventTypes::Destroy:
+		case NW::WindowEventTypes::Destroy:
 			PostQuitMessage(0);
 			eventInfo->OverrideProcResult(0);
 			break;
 		}
 	};
 
-	NW::UI::TextBoxSingleline force(&mainWindow, NW::UI::Position(5, 5, 200, 25), L"");
+	NW::TextBoxSingleline force(&mainWindow, NW::Position(5, 5, 200, 25), L"");
 	refreshForceText(&force);
-	NW::UI::Button applyForce(&mainWindow, NW::UI::Position(210, 5, 150, 25), L"Potwierdü");
-	applyForce.EventHandler = [&](NW::UI::ControlEventTypes eventType, NW::UI::ControlEventInfo* eventInfo) {
+	NW::Button applyForce(&mainWindow, NW::Position(210, 5, 150, 25), L"Apply");
+	applyForce.EventHandler = [&](NW::ControlEventTypes eventType, NW::ControlEventInfo* eventInfo) {
 		switch (eventType)
 		{
-		case NW::UI::ControlEventTypes::FromParent_Command:
+		case NW::ControlEventTypes::FromParent_Command:
 		{
 			try {
 				VEL.x = std::stof(force.GetText());
@@ -258,13 +261,13 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	};
 
 
-	NW::UI::TextBoxSingleline refreshRate(&mainWindow, NW::UI::Position(5, 35, 200, 25), L"");
+	NW::TextBoxSingleline refreshRate(&mainWindow, NW::Position(5, 35, 200, 25), L"");
 	refreshRefreshRateText(&refreshRate);
-	NW::UI::Button refreshRateApply(&mainWindow, NW::UI::Position(210, 35, 150, 25), L"Potwierdü");
-	refreshRateApply.EventHandler = [&](NW::UI::ControlEventTypes eventType, NW::UI::ControlEventInfo* eventInfo) {
+	NW::Button refreshRateApply(&mainWindow, NW::Position(210, 35, 150, 25), L"Apply");
+	refreshRateApply.EventHandler = [&](NW::ControlEventTypes eventType, NW::ControlEventInfo* eventInfo) {
 		switch (eventType)
 		{
-		case NW::UI::ControlEventTypes::FromParent_Command:
+		case NW::ControlEventTypes::FromParent_Command:
 		{
 			try {
 				refreshRateVal = std::stoi(refreshRate.GetText());
@@ -282,19 +285,19 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 	};
 
-	NW::UI::CheckBox adofaiModeCheckbox(&mainWindow, NW::UI::Position(5, 65, 360, 25), L"ADOFAI mode");
-	adofaiModeCheckbox.EventHandler = [&](NW::UI::ControlEventTypes eventType, NW::UI::ControlEventInfo* eventInfo) {
+	NW::CheckBox adofaiModeCheckbox(&mainWindow, NW::Position(5, 65, 360, 25), L"ADOFAI mode");
+	adofaiModeCheckbox.EventHandler = [&](NW::ControlEventTypes eventType, NW::ControlEventInfo* eventInfo) {
 		switch (eventType)
 		{
-		case NW::UI::ControlEventTypes::FromParent_Command:
+		case NW::ControlEventTypes::FromParent_Command:
 			adofaiMode = adofaiModeCheckbox.GetChecked();
 			break;
 		}
 	};
 
 
-	NW::UI::Font logFont(14, L"Segoe UI");
-	NW::UI::TextBoxMultiline logLoc(&mainWindow, NW::UI::Position(365, 5, 400, 200), L"");
+	NW::Font logFont(14, L"Segoe UI");
+	NW::TextBoxMultiline logLoc(&mainWindow, NW::Position(365, 5, 400, 200), L"");
 	logLoc.SetFont(&logFont);
 	logLoc.SetReadOnly(true);
 	logTextbox = &logLoc;
