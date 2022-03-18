@@ -70,7 +70,7 @@ void uninitializeController(int id)
 	PSM_FreeControllerListener(controllerList.controller_id[id]);
 }
 
-void InfoTimer(HWND, UINT, UINT_PTR, DWORD)
+void CALLBACK InfoTimer(HWND, UINT, UINT_PTR, DWORD)
 {
 	std::wstringstream wss;
 	wss << L"Connected: " << (PSM_GetIsConnected() ? "Yes" : "No") << "\r\n\r\n";
@@ -99,7 +99,7 @@ void setControllerColor(int id, unsigned char r, unsigned char g, unsigned char 
 	controllers[id].color = { r, g, b };
 }
 
-void MainTimer(HWND, UINT, UINT_PTR, DWORD)
+void CALLBACK MainTimer(HWND, UINT, UINT_PTR, DWORD)
 {
 	if (PSM_GetIsConnected())
 	{
