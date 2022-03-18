@@ -33,24 +33,19 @@ Oh and it only (somehow) works on Windows
 
 ### MSVC
 
-Paste the binaries from [there](PSMoveClient_CAPI.zip) to the source folder and also the dll file to your exe folder  
+Paste the lib from [there](PSMoveClient_CAPI-Binaries.zip) to the root folder and also the dll file to your exe folder  
 Or build PSMoveService yourself  
 Or download build of PSMoveService, then generate .lib definition file
 
 It should look like this:
 
 ```text
-PSMove Clicker
-│   main.cpp
-│   PSMoveClient_CAPI.dll
-│   PSMoveClient_CAPI.lib
-```
-
-```text
-x64
-└───Release
-        PSMove Clicker.exe
-        PSMoveClient_CAPI.dll
+root
+├───x64
+│   └───Release (or Debug)
+│       PSMove Clicker.exe
+│       PSMoveClient_CAPI.dll
+PSMoveClient_CAPI.lib
 ```
 
 Also keep the NadWin directory (it's a GUI library from stone age)
