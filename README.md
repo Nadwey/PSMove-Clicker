@@ -76,3 +76,7 @@ Right click on PSMove_Clicker in the solution explorer and click `Set as Startup
 ### Step 1
 
 Good luck
+
+## Licence
+
+MIT
