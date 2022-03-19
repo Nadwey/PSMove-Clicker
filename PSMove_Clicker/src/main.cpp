@@ -77,7 +77,17 @@ private:
 };
 
 int main() {
-    controllerManager = new PSMC::ControllerManager();
+    bool success = false;
+    while (!success) {
+        try {
+            controllerManager = new PSMC::ControllerManager();
+            success = true;
+        }
+        catch (...) {
+            dialog_result msgBoxResult = message_box::show("Failed to connect with PSMoveService", "Error", message_box_buttons::retry_cancel, message_box_icon::error);
+            if (msgBoxResult == dialog_result::cancel) return 1;
+        }
+    }
     application::run(mainWindow());
     delete controllerManager;
 }
