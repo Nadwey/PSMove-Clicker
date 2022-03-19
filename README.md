@@ -41,7 +41,7 @@ Notice: This "tutorial" is not tested
 
 Install [gammasoft71/xtd](https://github.com/gammasoft71/xtd) and add it to this project:  
 
-- go to project root dir, and run xtdc run, ignore the errors
+- go to project root dir, and run `xtdc run`, ignore the errors
 
 ### Step 2
 
