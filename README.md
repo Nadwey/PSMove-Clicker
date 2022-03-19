@@ -17,6 +17,7 @@ Buttons:
 - Cross button - Left Mouse Button - supports holding  
 - Circle button - Right Mouse Button - supports holding  
 - Select button - Escape Button - supports holding  
+- T button - Mouse cursor
 - PS Button - Sets main controller in ADOFAI mode
 
 Control panel:
