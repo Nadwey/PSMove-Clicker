@@ -45,7 +45,7 @@ Install [gammasoft71/xtd](https://github.com/gammasoft71/xtd) and add it to this
 
 ### Step 2
 
-Paste the lib file from [there](PSMoveClient_CAPI-Binaries.zip) somewhere and also the dll file to your exe folder  
+Paste the lib file from [there](PSMoveClient_CAPI-Binaries.zip) somewhere (for example to `build/` directory) and also the dll file to your exe folder  
 Or build PSMoveService yourself  
 Or download build of PSMoveService, then generate .lib definition file
 
@@ -59,8 +59,8 @@ root
                 PSMoveClient_CAPI.dll
 ```
 
-Add the lib file to linker (Configuration Properties > Linker > Input > Additional Dependencies)  
-for example: $(SolutionDir)PSMoveClient_CAPI.lib
+Add the lib file to linker (`Configuration Properties > Linker > Input > Additional Dependencies`)  
+for example: `$(SolutionDir)PSMoveClient_CAPI.lib`
 
 ### Step 3
 
