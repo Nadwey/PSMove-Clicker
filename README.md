@@ -9,7 +9,8 @@ Also, don't set the force to 0... Bad things will happen
 
 I recommend using [PSMoveServiceEx](https://github.com/Timocop/PSMoveServiceEx/) instead of [PSMoveService](https://github.com/psmoveservice/PSMoveService), but you can also use it.
 
-Run PSMoveService first, then PSMove Clicker.
+Run PSMoveService first, then PSMove Clicker.  
+If  the program doesn't start, it means that it can't connect to PSMoveService
 
 Buttons:
 
