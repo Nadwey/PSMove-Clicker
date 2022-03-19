@@ -60,7 +60,7 @@ root
                 PSMoveClient_CAPI.dll
 ```
 
-Add the lib file to linker (`Configuration Properties > Linker > Input > Additional Dependencies`)  
+Add the lib file to linker (`Project settings > Configuration Properties > Linker > Input > Additional Dependencies`)  
 for example: `$(SolutionDir)PSMoveClient_CAPI.lib`
 
 ### Step 3
