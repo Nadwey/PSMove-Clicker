@@ -12,7 +12,8 @@ Also, don't set the force to 0... Bad things will happen
 I recommend using [PSMoveServiceEx](https://github.com/Timocop/PSMoveServiceEx/) instead of [PSMoveService](https://github.com/psmoveservice/PSMoveService), but you can also use it.
 
 Run PSMoveService first, then PSMove Clicker.  
-If  the program doesn't start, it means that it can't connect to PSMoveService
+If  the program doesn't start, it means that it can't connect to PSMoveService  
+You also need to have [VC Redist](https://docs.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist) installed
 
 Buttons:
 
