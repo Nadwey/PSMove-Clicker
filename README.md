@@ -44,7 +44,7 @@ Notice: This "tutorial" is not tested
 
 Install [gammasoft71/xtd](https://github.com/gammasoft71/xtd) and add it to this project:  
 
-- go to project root dir, and run `xtdc run`, ignore the errors
+- go to project root dir, and run `xtdc build`, ignore the errors
 
 ### Step 2
 
@@ -62,7 +62,7 @@ root
                 PSMoveClient_CAPI.dll
 ```
 
-Add the lib file to linker (`Configuration Properties > Linker > Input > Additional Dependencies`)  
+Add the lib file to linker (`Project settings > Configuration Properties > Linker > Input > Additional Dependencies`)  
 for example: `$(SolutionDir)PSMoveClient_CAPI.lib`
 
 ### Step 3
