@@ -1,5 +1,9 @@
 # PSMove-Clicker
 
+## NOTICE
+
+I'm done with C++ GUI libraries, I will port this to Electron in the future
+
 ![Program](program.png)
 
 This program was primarly made for ADOFAI, but you can use it as a mouse.
