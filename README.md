@@ -1,8 +1,8 @@
 # PSMove-Clicker
 
-## NOTICE
+## REPOSITORY ARCHIVED
 
-I'm done with C++ GUI libraries, I will port this to Electron in the future
+Use [PSMoveClicker-electron](https://github.com/Nadwey/PSMoveClicker-electron) instead
 
 ![Program](program.png)
 
